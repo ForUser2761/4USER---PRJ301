@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form with Table Layout</title>
+    </head>
+    <body>
+
+        <table >
+            <h1>Fill in the form</h1>
+            <form action="abc" method="post">
+                <tr>
+                    <td>Full Name:</td>
+                    <td><input type="text" name="fullname"></td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td><input type="text" name="phone"></td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td>
+                        <input type="radio" name="gender" value="Male"> Male
+                        <input type="radio" name="gender" value="Female"> Female
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select Programming Languages to learn:</td>
+                    <td>
+                        <input type="checkbox" name="language" value="Java"> Java
+                        <input type="checkbox" name="language" value="Python"> Python
+                        <input type="checkbox" name="language" value="SQL"> SQL
+                        <input type="checkbox" name="language" value="PHP"> PHP
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select Course duration:</td>
+                    <td>
+                        <select name="courseDuration">
+                            <option value="3 Months">3 Months</option>
+                            <!-- Add other duration options here -->
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Anything else you want to share:</td>
+                    <td><textarea name="additionalInfo"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit Details"></td>
+                </tr>
+            </form>
+        </table>
+
+    </body>
+</html>
