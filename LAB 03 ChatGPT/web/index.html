@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple Calculator</title>
+    </head>
+    <body>
+        <table>
+            <form action="cal" method="post">
+                <tr>
+                    <th colspan="2">Simple Calculator</th>
+                </tr>
+                <tr>
+                    <td>First:</td>
+                    <td><input type="text" name="first" value=""></td>
+                </tr>
+                <tr>
+                    <td>Second:</td>
+                    <td><input type="text" name="second" value=""></td>
+                </tr>
+                <tr>
+                    <td>Operator:</td>
+                    <td>
+                        <select name="operator">
+                            <option value="add">+</option>
+                            <option value="subtract">-</option>
+                            <option value="multiply">*</option>
+                            <option value="divide">/</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td >
+                        <input type="submit" value="Compute">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </body>
+</html>
