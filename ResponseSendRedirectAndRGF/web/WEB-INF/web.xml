@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>AServlet</servlet-name>
+        <servlet-class>controller.AServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BServlet</servlet-name>
+        <servlet-class>controller.BServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CServlet</servlet-name>
+        <servlet-class>controller.CServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DServlet</servlet-name>
+        <servlet-class>controller.DServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AServlet</servlet-name>
+        <url-pattern>/a</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BServlet</servlet-name>
+        <url-pattern>/b</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CServlet</servlet-name>
+        <url-pattern>/c</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DServlet</servlet-name>
+        <url-pattern>/d</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
