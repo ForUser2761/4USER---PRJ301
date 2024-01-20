@@ -38,6 +38,9 @@ public class StudentController extends HttpServlet {
             case "update":
                 update(request, response);
                 break;
+            case "delete":
+                delete(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -91,6 +94,12 @@ public class StudentController extends HttpServlet {
         //tao doi tuong Student
         Student student = new Student(id, name, age, gender, listHobbies);
         manage.update(student);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) {
+        String id = request.getParameter("id").trim();
+        //xoa
+        manage.delete(id);
     }
 
 }

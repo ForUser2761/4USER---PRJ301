@@ -6,6 +6,7 @@ package controller;
 
 import entity.Student;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ManageStudent {
     public List<Student> getList() {
         return list;
     }
-    
+
     public void add(Student student) {
         list.add(student);
     }
@@ -33,5 +34,21 @@ public class ManageStudent {
                 student1.setHobbies(student.getHobbies());
             }
         }
+    }
+
+    void delete(String id) {
+//        for (Student student : list) {
+//            if (student.getId().equalsIgnoreCase(id)) {
+//                
+//            }
+//        }
+        Iterator<Student> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Student student = iterator.next();
+            if (student.getId().equalsIgnoreCase(id)) {
+                iterator.remove(); // An toàn xóa phần tử
+            }
+        }
+
     }
 }

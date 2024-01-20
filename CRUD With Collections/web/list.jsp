@@ -153,7 +153,10 @@
                     </td>
                     <td >
                         <a href="#" onclick="update(this)">Edit</a>
-                        <a href="#">Delete</a>
+                        <form action="student?action=delete" method="POST" >
+                            <input type="hidden" name="id" value="${fu.id}"/>
+                            <a href="#" onclick="submitFunction(this)">Delete</a>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
@@ -212,6 +215,11 @@
                 });
 
 
+            }
+            
+            function submitFunction(e) {
+                let form = e.closest('form');
+                form.submit();
             }
         </script>
 
