@@ -129,6 +129,12 @@
 
         <!-- New table for the list of students -->
         <h2>List of Students</h2> <!-- Title for the student list -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <form action="student?action=search" method="POST">
+                <input type="text" name="keyword" placeholder="Search for students...">
+                <input type="submit" value="Search">
+            </form>
+        </div>
         <table class="student-list" border="1">
             <tr>
                 <th>ID</th>

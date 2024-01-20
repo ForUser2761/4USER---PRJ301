@@ -30,22 +30,29 @@ public class StudentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getParameter("action");
-        
+        List<Student> list = null;
         switch (action) {
             case "insert":
                 insert(request, response);
+                list = manage.getList();
                 break;
             case "update":
                 update(request, response);
+                list = manage.getList();
                 break;
             case "delete":
                 delete(request, response);
+                list = manage.getList();
+                break;
+            case "search":
+                list = search(request, response);
                 break;
             default:
-                throw new AssertionError();
+                
         }
+        request.setAttribute("list", list);
         //chuyen ve lai trang home controller
-        response.sendRedirect("home");
+        request.getRequestDispatcher("list.jsp").forward(request, response);
     }
 
    
@@ -100,6 +107,13 @@ public class StudentController extends HttpServlet {
         String id = request.getParameter("id").trim();
         //xoa
         manage.delete(id);
+    }
+
+    private List<Student> search(HttpServletRequest request, HttpServletResponse response) {
+        String keyword = request.getParameter("keyword").trim() == null 
+                ? "" : request.getParameter("keyword").trim();
+        List<Student> list = manage.search(keyword);
+        return list;
     }
 
 }

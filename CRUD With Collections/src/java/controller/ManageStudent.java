@@ -51,4 +51,17 @@ public class ManageStudent {
         }
 
     }
+
+    List<Student> search(String keyword) {
+        List<Student> listSearch = new ArrayList<>();
+        //upper case
+        keyword = keyword.toUpperCase();
+        
+        for (Student student : list) {
+            if (student.getName().toUpperCase().contains(keyword)) {
+                listSearch.add(student);
+            }
+        }
+        return listSearch;
+    }
 }
