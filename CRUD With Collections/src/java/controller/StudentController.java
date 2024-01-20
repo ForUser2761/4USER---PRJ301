@@ -29,21 +29,18 @@ public class StudentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //get ra thong tin
-        String id = request.getParameter("id");
-        String name =request.getParameter("name");
-        boolean gender = request.getParameter("gender").equalsIgnoreCase("male");
-        String age = request.getParameter("age");
-        String[] hobbies_raw = request.getParameterValues("hobbies");
-        List<String> listHobbies = new ArrayList<>(Arrays.asList(hobbies_raw));
+        String action = request.getParameter("action");
         
-        
-        //tao doi tuong Student
-        Student student = new Student(id, name, 0, gender, listHobbies);
-        
-        //them vao ben trong list 
-        manage.add(student);
-        
+        switch (action) {
+            case "insert":
+                insert(request, response);
+                break;
+            case "update":
+                update(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
         //chuyen ve lai trang home controller
         response.sendRedirect("home");
     }
@@ -65,5 +62,35 @@ public class StudentController extends HttpServlet {
             out.println("</html>");
         }
     } 
+
+    private void insert(HttpServletRequest request, HttpServletResponse response) {
+        //get ra thong tin
+        String id = request.getParameter("id");
+        String name =request.getParameter("name");
+        boolean gender = request.getParameter("gender").equalsIgnoreCase("male");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String[] hobbies_raw = request.getParameterValues("hobbies");
+        List<String> listHobbies = new ArrayList<>(Arrays.asList(hobbies_raw));
+        
+        
+        //tao doi tuong Student
+        Student student = new Student(id, name, age, gender, listHobbies);
+        
+        //them vao ben trong list 
+        manage.add(student);
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) {
+        String id = request.getParameter("id").trim();
+        String name =request.getParameter("name").trim();
+        boolean gender = request.getParameter("gender").equalsIgnoreCase("male");
+        int age = Integer.parseInt(request.getParameter("age").trim());
+        String[] hobbies_raw = request.getParameterValues("hobbies");
+        List<String> listHobbies = new ArrayList<>(Arrays.asList(hobbies_raw));
+        
+        //tao doi tuong Student
+        Student student = new Student(id, name, age, gender, listHobbies);
+        manage.update(student);
+    }
 
 }

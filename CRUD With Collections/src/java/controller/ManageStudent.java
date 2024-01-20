@@ -23,4 +23,15 @@ public class ManageStudent {
     public void add(Student student) {
         list.add(student);
     }
+
+    void update(Student student) {
+        for (Student student1 : list) {
+            if (student1.getId().equals(student.getId())) {
+                student1.setName(student.getName());
+                student1.setGender(student.isGender());
+                student1.setAge(student.getAge());
+                student1.setHobbies(student.getHobbies());
+            }
+        }
+    }
 }

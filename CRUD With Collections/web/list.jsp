@@ -83,7 +83,8 @@
     </head>
     <body>
 
-        <form action="student?action=insert" method="post">
+        <form action="student?action=insert" method="post" id="form">
+            <h1 style="text-align: center">INSERT</h1>
             <table border="1">
                 <tr>
                     <td class="label">Id</td>
@@ -97,7 +98,7 @@
                     <td class="label">Gender</td>
                     <td>
                         <input type="radio" name="gender" value="male"> Male
-                        <input type="radio" name="gender" value="female"/> Female
+                        <input type="radio" name="gender" value="female" checked/> Female
                     </td>
                 </tr>
                 <tr>
@@ -135,24 +136,84 @@
                 <th>Gender</th>
                 <th>AGE</th>
                 <th>HOBBIES</th>
+                <th>Action</th>
             </tr>
             <!-- Add rows here with student data -->
             <!-- Example row: -->
             <c:forEach items="${list}" var="fu">
                 <tr>
-                    <td> ${fu.id}</td>
-                    <td>${fu.name}</td>
-                    <td>${fu.gender eq true ? 'male' : 'female'}</td>
-                    <td>${fu.age}</td>
-                    <td>
+                    <td name="id"> ${fu.id}</td>
+                    <td name="name">${fu.name}</td>
+                    <td name="gender">${fu.gender eq true ? 'male' : 'female'}</td>
+                    <td name="age">${fu.age}</td>
+                    <td name="hobbies">
                         <c:forEach items="${fu.hobbies}" var="hob" >
                             ${hob} 
                         </c:forEach>
+                    </td>
+                    <td >
+                        <a href="#" onclick="update(this)">Edit</a>
+                        <a href="#">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
             <!-- Repeat for more students -->
         </table>
+
+        <script>
+            function update(e) {
+                let form = document.querySelector("#form");
+                //+ đổi lại title h1 trong form thành update
+                form.querySelector("h1").innerText = "UPDATE";
+                //+ chuyển form với thuộc tính aciton => student?action = update
+                form.action = "student?action=update";
+
+                //lấy dữ liệu ở record mà người dùng bấm
+                let tr = e.closest('tr');
+                let idRecord = tr.querySelector("td[name='id']").textContent;
+                let nameRecord = tr.querySelector("td[name='name']").textContent;
+                let genderRecord = tr.querySelector("td[name='gender']").textContent;
+                let ageRecord = tr.querySelector("td[name='age']").textContent;
+                let hobbbies = tr.querySelector("td[name='hobbies']").textContent.trim().split(' ');
+                let filteredHobbies = hobbbies.filter(function (hobb) {
+                    return hobb.trim() != '';
+                });
+
+                //đắp dữ liệu lên form
+                form.querySelector("input[name='id']").value = idRecord;
+                form.querySelector("input[name='name']").value = nameRecord;
+                form.querySelector("input[name='age']").value = ageRecord;
+                let hobbiesInput = form.querySelectorAll("input[name='hobbies']");
+
+                // Đặt trạng thái checked cho nút radio gender
+                if (genderRecord.trim().toLowerCase() === "male") {
+                    form.querySelector("input[name='gender'][value='male']").checked = true;
+                } else if (genderRecord.trim().toLowerCase() === "female") {
+                    form.querySelector("input[name='gender'][value='female']").checked = true;
+                }
+
+                // Xóa trạng thái checked hiện tại của các hộp kiểm hobbies
+                form.querySelectorAll("input[name='hobbies']").forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+//                filteredHobbies.forEach(function (hobb) {
+//                    hobbiesInput.forEach(function (input) {
+//                        if (input.value === hobb) {
+//                            input.checked = true;
+//                        }
+//                    });
+//                });
+                filteredHobbies.forEach(function (hobby) {
+                    let checkbox = form.querySelector("input[name='hobbies'][value='" + hobby + "']");
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+
+
+            }
+        </script>
 
     </body>
 </html>
