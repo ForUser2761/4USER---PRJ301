@@ -11,6 +11,13 @@
     </head>
 
     <body>
+        <form action="product?action=search" method="POST">
+            <input type="text" name="keyword" placeholder="Nhap vao name cua san pham"/>
+            <input type="submit" value="Search"/>
+        </form>
+        
+        <br/>
+        <br/>
         <table border="1">
             <tr>
                 <th>Id</th>
