@@ -45,6 +45,9 @@ public class ProductController extends HttpServlet {
             case "search":
                 listProduct = searchProduct(request, response);
                 break;
+            case "insert":
+                listProduct = insert(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -78,6 +81,23 @@ public class ProductController extends HttpServlet {
         List<Product> listProduct = dao.findByName(keyword);
         //tra ve list
         return listProduct;
+    }
+
+    private List<Product> insert(HttpServletRequest request, HttpServletResponse response) {
+        ProductDAO dao = new ProductDAO();
+        //get ve data
+        String name = request.getParameter("name");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        
+        Product product = new Product();
+        product.setName(name);
+        product.setQuantity(quantity);
+        product.setPrice(price);
+        //insert vaot rong DB
+        dao.insert(product);
+        //get ve toan bo data moi
+        return dao.findAll();
     }
 
 }

@@ -7,6 +7,7 @@ package dal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 import model.Product;
 
@@ -71,5 +72,33 @@ public class ProductDAO extends DBContext {
             System.err.println(e.getMessage());
         }
         return listFound;
+    }
+
+    public void insert(Product product) {
+        //ket noi voi DB
+        connection = getConnection();
+        //tao cau lenh SQL
+        String sql = "INSERT INTO [dbo].[Product]\n"
+                + "           ([name]\n"
+                + "           ,[quantity]\n"
+                + "           ,[price])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?)";
+        try {
+            //tao doi tuong prepared statement ( them generated key vao tham so thu 2)
+            statement = connection.prepareStatement(sql, 
+                    Statement.RETURN_GENERATED_KEYS);
+            //set parameter
+            statement.setObject(1, product.getName());
+            statement.setObject(2, product.getQuantity());
+            statement.setObject(3, product.getPrice());
+            //thuc thi cau lenh
+            statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

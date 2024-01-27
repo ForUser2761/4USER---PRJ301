@@ -17,6 +17,7 @@
         </form>
         
         <br/>
+        <button onclick="addProduct()">Add</button>
         <br/>
         <table border="1">
             <tr>
@@ -39,6 +40,33 @@
                 </tr>
             </c:forEach>
         </table>
+        
+        <form action="product?action=insert" id="formAddEdit"  method="POST" style="display: none">
+            <h1>Form</h1>
+            Name <input type="text" name="name"/>
+            <br/>
+            Quantity <input type="number" name="quantity"/>
+            <br/>
+            Price <input type="text" name="price"/>
+            <br/>
+            <input type="submit" value="Submit"/>
+        </form>
     </body>
-
+    
+    <script>
+        function addProduct() {
+            displayForm();
+            
+            
+        }
+        
+        function displayForm() {
+            let form = document.querySelector("#formAddEdit");
+            if(form.style.display === 'none') {
+                form.style.display = 'block';
+            }else {
+                form.style.display = 'none';
+            }
+        }
+    </script>
 </html>
