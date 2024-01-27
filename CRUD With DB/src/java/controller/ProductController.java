@@ -48,6 +48,12 @@ public class ProductController extends HttpServlet {
             case "insert":
                 listProduct = insert(request, response);
                 break;
+            case "update":
+                listProduct = update(request, response);
+                break;
+            case "delete":
+                listProduct = delete(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -89,7 +95,7 @@ public class ProductController extends HttpServlet {
         String name = request.getParameter("name");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         double price = Double.parseDouble(request.getParameter("price"));
-        
+
         Product product = new Product();
         product.setName(name);
         product.setQuantity(quantity);
@@ -97,6 +103,37 @@ public class ProductController extends HttpServlet {
         //insert vaot rong DB
         dao.insert(product);
         //get ve toan bo data moi
+        return dao.findAll();
+    }
+
+    private List<Product> update(HttpServletRequest request, HttpServletResponse response) {
+        ProductDAO dao = new ProductDAO();
+
+        //get data
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        double price = Double.parseDouble(request.getParameter("price"));
+
+        Product product = new Product();
+        product.setId(id);
+        product.setName(name);
+        product.setQuantity(quantity);
+        product.setPrice(price);
+        //update vao DB
+        dao.update(product);
+        //get ve toan bo data moi
+        return dao.findAll();
+        //tra ve list
+    }
+
+    private List<Product> delete(HttpServletRequest request, HttpServletResponse response) {
+        ProductDAO dao = new ProductDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        Product product = new Product();
+        product.setId(id);
+        dao.deleteById(product);
         return dao.findAll();
     }
 

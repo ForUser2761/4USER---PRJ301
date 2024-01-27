@@ -88,7 +88,7 @@ public class ProductDAO extends DBContext {
                 + "           ,?)";
         try {
             //tao doi tuong prepared statement ( them generated key vao tham so thu 2)
-            statement = connection.prepareStatement(sql, 
+            statement = connection.prepareStatement(sql,
                     Statement.RETURN_GENERATED_KEYS);
             //set parameter
             statement.setObject(1, product.getName());
@@ -97,6 +97,48 @@ public class ProductDAO extends DBContext {
             //thuc thi cau lenh
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Product product) {
+        //ket noi voi DB
+        connection = getConnection();
+        //tao cau lenh SQL
+        String sql = "UPDATE [dbo].[Product]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[quantity] = ?\n"
+                + "      ,[price] = ?\n"
+                + " WHERE id = ?";
+        try {
+            //tao doi tuong prepared statement ( them generated key vao tham so thu 2)
+            statement = connection.prepareStatement(sql);
+            //set parameter
+            statement.setObject(1, product.getName());
+            statement.setObject(2, product.getQuantity());
+            statement.setObject(3, product.getPrice());
+            statement.setObject(4, product.getId());
+            //thuc thi cau lenh
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteById(Product product) {
+        //ket noi voi DB
+        connection = getConnection();
+        //tao cau lenh SQL
+        String sql = "DELETE FROM [dbo].[Product]\n"
+                + "      WHERE id = ?";
+        try {
+            //tao doi tuong prepared statement ( them generated key vao tham so thu 2)
+            statement = connection.prepareStatement(sql);
+            //set parameter
+            statement.setObject(1, product.getId());
+            //thuc thi cau lenh
+            statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
