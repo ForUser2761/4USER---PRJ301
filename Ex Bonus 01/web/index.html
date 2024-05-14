@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator Form</title>
+</head>
+<body>
+    <form action="cal" method="post">
+        <table>
+            <tr>
+                <td>Enter number 1:</td>
+                <td><input type="text" name="number1" /></td>
+            </tr>
+            <tr>
+                <td>Enter number 2:</td>
+                <td><input type="text" name="number2" /></td>
+            </tr>
+            <tr>
+                <td>Operator:</td>
+                <td>
+                    <select name="operator">
+                        <option value="add">Add</option>
+                        <option value="subtract">Subtract</option>
+                        <option value="multiply">Multiply</option>
+                        <option value="divide">Divide</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Calculate" />
+                    <input type="reset" value="Reset" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
