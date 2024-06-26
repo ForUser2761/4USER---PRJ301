@@ -15,10 +15,11 @@ import model.Instructor;
  *
  * @author ADMIN
  */
-public class InstructorDAO extends DBContext{
-public List<Instructor> getAll() {
+public class InstructorDAO extends DBContext {
+
+    public List<Instructor> getAll() {
         List<Instructor> list = new ArrayList<>();
-        String sql = "select*from Instructors";
+        String sql = "select * from Instructors";
         //chay lenhj truy van
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -33,10 +34,11 @@ public List<Instructor> getAll() {
 
         return list;
     }
+
     public static void main(String[] args) {
         InstructorDAO id = new InstructorDAO();
         List<Instructor> li = id.getAll();
         System.out.println(li.get(0).getInsid());
     }
-    
+
 }

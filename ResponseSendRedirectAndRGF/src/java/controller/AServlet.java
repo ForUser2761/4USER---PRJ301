@@ -25,9 +25,9 @@ public class AServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("b").forward(request, response);
     }
-
+    
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

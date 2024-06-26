@@ -71,7 +71,7 @@ public class ListServlet extends HttpServlet {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             default:
-                response.sendRedirect("list");
+                response.sendRedirect("show");
         }
     }
 
